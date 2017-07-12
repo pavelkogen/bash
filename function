@@ -1,0 +1,20 @@
+#!/bin/bash
+
+#Function test
+function funct {
+	echo "Hello, world!"
+	return
+}
+
+#Function form two
+namef () {
+	echo "Hi, there!"
+	return
+}
+
+funct
+namef
+
+#Чтобы вызовы функции интерпретировались не как имена внешних программ, 
+#а действительно как вызовы функций, 
+#эти вызовы должны быть определены в сценарии до их вызова

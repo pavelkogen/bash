@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# read-menu2: программа вывода системной информации, управляемая с помощью меню
+
+clear
+echo "
+Please Select:
+
+1. Display System Information
+2. Display Disk Space
+3. Display Home Space Utilizatin
+0. Quit
+"
+read -p "Enter selection [0-3] > "
+
+if test "$(echo "$REPLY" | grep '^[0-3]$')"; then
+		if test $REPLY -eq 0; then
+				echo "Program terminated."
+				exit
+		fi
+		if test $REPLY -eq 1; then
+				echo "Hostname: $HOSTNAME"
+				uptime
+				exit
+		fi
+		if test $REPLY -eq 2; then
+				df -h
+				exit
+		fi
+		if test $REPLY -eq 3; then
+				if test $(id -u) -eq 0; then
+						echo "Home Space Utilization (All Users)"
+						du -sh /home/*
+				else
+						echo "Home Space Utilization ($USER)"
+						du -sh $HOME
+				fi
+				exit
+		fi
+else
+		echo "Invalid entry." >&2
+		exit 1
+fi
